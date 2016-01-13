@@ -3,15 +3,16 @@
 var express = require("express");
 var multer = require("multer");
 
+// var storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, './uploads');
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.originalname);
+//   }
+// });
 
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './uploads');
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  }
-});
+var storage = multer.memoryStorage();
 
 var upload = multer({ 
   storage: storage,
@@ -27,8 +28,7 @@ app.get('/', function(req, res) {
 app.post('/upload', upload.single('img'), function (req, res) {
   // console.log(req.body) // form fields
   // console.log(req.file) // form files
-  res.json(req.file);
-  
+  res.json({ fileSize: req.file.size });
 });
 
 var port = process.env.PORT || 8080; 
