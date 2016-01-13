@@ -3,6 +3,7 @@
 var express = require("express");
 var multer = require("multer");
 
+// If you will need to save files on disk you can do it like this:
 // var storage = multer.diskStorage({
 //   destination: function (req, file, cb) {
 //     cb(null, './uploads');
